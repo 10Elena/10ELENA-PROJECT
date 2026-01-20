@@ -1,108 +1,26 @@
-# 10ELENA-PROJECT
+Тестирование формы авторизации Личного кабинета Ростелеком
+В рамках выполнения проекта предстоит протестировать новый интерфейс авторизации в личном кабинете от заказчика Ростелеком Информационные Технологии по предоставленным требованиям к сайту.
+→ Объект тестирования: https://b2c.passport.rt.ru
+Задание:
+Протестировать требования. Разработать тест-кейсы (не менее 15). Необходимо применить несколько техник тест-дизайна. Провести автоматизированное тестирование продукта (не менее 15 автотестов). Заказчик ожидает по одному автотесту на каждый написанный тест-кейс. Оформить свой набор автотестов в GitHub. Оформить описание обнаруженных дефектов. Использовать шаблоны для оформления тест-кейсов и обнаруженных дефектов.
+Выполнение проекта:
+1.	Протестированы требования и указаны комментарии/замечания по пунктам.
+2.	Разработаны тест-кейсы с использованием шаблона.
+3.	Оформлено описание обнаруженных дефектов с использованием шаблона.
+→ Ссылка на документ: TransFiles.ru/31v0c
+4.	Тест-кейсы и автотесты для проекта Ростелеком https://b2c.passport.rt.ru:
+https://github.com/10Elena/10ELENA-PROJECT/edit/main/README.md  
+5.	Использовались библиотеки selenium, pytest, pytest-selenium
+6.	Для запуска необходимо набрать в терминале pytest -v --driver Chrome -driver-path C:\Users\71601088\PycharmProjects\pythonProject14chromedriver.exe test_rostelecom.py
 
-conftest.py
+Перед запуском тестов требуется установить необходимые библиотеки командой:
+pip install -r requirements.txt Запуск тестов при помощи команд в консоли:
+python -m pytest -v --driver Chrome --driver-path chromedriver.exe tests/test_auth_page.py python -m pytest -v --driver Chrome --driver-path chromedriver.exe tests/test_registr_page.py 
 
-  	  import pytest
-    	from selenium import webdriver
-	
-    	@pytest.fixture()
-    	def driver():
-	    driver = webdriver.Chrome('C:/skillfactory/chromedriver.exe')
-	    driver.implicitly_wait(5)
-	    yield driver
-	
-       driver.quit()
-
-
-‎pages/base_page.py‎
-
-from selenium.webdriver.support.ui import WebDriverWait
-from selenium.webdriver.support import expected_conditions as EC
-
-class BasePage:
-    def __init__(self, driver):
-        self.driver = driver
-
-    # Загрузка страницы
-    def load(self):
-        self.driver.get('https://b2c.passport.rt.ru')
-
-    # Проверка загрузки элемента
-    def is_loaded(self,locator, time=5) -> bool:
-        try:
-            WebDriverWait(self.driver, time).until(EC.presence_of_element_located((locator)))
-            return True
-        except:
-            return False
-
-    # Найти элемент и кликнуть по нему
-    def find_element_and_click(self, locator, time=5):
-        WebDriverWait(self.driver, time).until(EC.visibility_of_element_located(locator)).click()
-
-    # Ввод данных
-    def data_input(self, locator, text, time=5):
-        WebDriverWait(self.driver, time).until(EC.visibility_of_element_located(locator)).send_keys(text)
-
-    # Получить атрибут текст элемента
-    def get_text_of_element(self, locator, time=5):
-        element = WebDriverWait(self.driver, time).until(EC.visibility_of_element_located(locator))
-        return element.text
-
-
-pages/main_page.py
-
-from selenium.webdriver.common.by import By
-from pages.base_page import BasePage
-
-
-class MainPage(BasePage):
-    def __init__(self, driver):
-        super().__init__(driver)
-        self.driver.get('https://b2c.passport.rt.ru/')
-
-    AUTORIZATION = (By.XPATH, "//h1[contains(text(),'Авторизация')]")
-    LOGIN = (By.XPATH, "//div[@id='t-btn-tab-login']")
-    USERNAME = (By.XPATH, "//input[@id='username']")
-    PASSWORD = (By.XPATH, "//input[@id='password']")
-    BUTTON = (By.XPATH, "//button[@id='kc-login']")
-    BUTTON_LOGOUT = (By.CSS_SELECTOR, "#logout-btn")
-    ERROR = (By.XPATH, "//span[@id='form-error-message']")
-
-
-test_rostelecom.py
-
-from pages.main_page import MainPage
-from time import sleep
-
-# Проверка загрузки страницы авторизации
-def test_main(driver):
-    main_page = MainPage(driver)
-    autorization = main_page.is_loaded(MainPage.AUTORIZATION)
-    assert autorization == True
-
-# Проверка кликабельности кнопки "Логин"
-def test_login_is_clicable(driver):
-    main_page = MainPage(driver)
-    main_page.find_element_and_click(MainPage.LOGIN)
-    login_button = main_page.is_loaded(MainPage.USERNAME)
-    assert login_button == True
-
-# Проверка позитивного сценария авторизации по почте
-def test_valid_data_mail(driver):
-    main_page = MainPage(driver)
-    main_page.data_input(MainPage.USERNAME, "e.plechanova@mail.ru")
-    main_page.data_input(MainPage.PASSWORD, "12141618Nk")
-    sleep(10)
-    main_page.find_element_and_click(MainPage.BUTTON)
-    element = main_page.is_loaded(MainPage.BUTTON_LOGOUT)
-    assert element == True
-
-# Проверка авторизации c неправильным паролем
-def test_invalid_data(driver):
-    main_page = MainPage(driver)
-    main_page.data_input(MainPage.USERNAME, "e.plechanova@mail.ru")
-    main_page.data_input(MainPage.PASSWORD, "121416Nk")
-    main_page.find_element_and_click(MainPage.BUTTON)
-    error_button = main_page.is_loaded(MainPage.ERROR)
-    assert error_button == True
-
+При разработке тест-кейсов были применены несколько техник тест-дизайна:
+•	Классы эквивалентности и анализа граничных значений - для тестирования полей ввода формы регистрации
+•	Техника предугадывание или прогнозирование ошибок, позитивное и негативное тестирование - тестирование всех полей ввода форм регистрации и авторизации (позитивное - корректные данные, негативное - некорректные данные)
+•	таблица принятия решений (с помощью таблиц, предоставленных в требованиях) - эта техника лежит в основе составления тест-кейсов - какие данные необходимы для входа в каждый конкретный сервис и корректно ли это отрабатывает система,
+•	диаграмма состояний и переходов - позволяет для себя четко понимать последовательность действий и состояний системы после них (какие сценарии необходимо пройти для достижения нужной цели), для каждого сервиса, что необходимо для прописания автотестов.
+Тесты делятся на позитивные и негативные.
+Тестирование проводилось методом черного ящика.
