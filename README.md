@@ -7,7 +7,7 @@
 1.	Протестированы требования и указаны комментарии/замечания по пунктам.
 2.	Разработаны тест-кейсы с использованием шаблона.
 3.	Оформлено описание обнаруженных дефектов с использованием шаблона.
-→ Ссылка на документ: TransFiles.ru/31v0c
+→ Ссылка на документ: https://docs.google.com/spreadsheets/d/1reNPjujBDI0GYqcRrQ30d5Fcc2gEwu9k/edit?usp=sharing&ouid=117560173873643105955&rtpof=true&sd=true
 4.	Тест-кейсы и автотесты для проекта Ростелеком https://b2c.passport.rt.ru:
 https://github.com/10Elena/10ELENA-PROJECT/edit/main/README.md  
 5.	Использовались библиотеки selenium, pytest, pytest-selenium
