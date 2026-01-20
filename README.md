@@ -8,8 +8,7 @@
 2.	Разработаны тест-кейсы с использованием шаблона.
 3.	Оформлено описание обнаруженных дефектов с использованием шаблона.
 → Ссылка на документ: https://docs.google.com/spreadsheets/d/1reNPjujBDI0GYqcRrQ30d5Fcc2gEwu9k/edit?usp=sharing&ouid=117560173873643105955&rtpof=true&sd=true
-4.	Тест-кейсы и автотесты для проекта Ростелеком https://b2c.passport.rt.ru:
-https://github.com/10Elena/10ELENA-PROJECT/edit/main/README.md  
+4.	Тест-кейсы и автотесты для проекта Ростелеком https://github.com/10Elena/10ELENA-PROJECT.git  
 5.	Использовались библиотеки selenium, pytest, pytest-selenium
 
 Перед запуском тестов требуется установить необходимые библиотеки командой:
