@@ -11,7 +11,6 @@
 4.	Тест-кейсы и автотесты для проекта Ростелеком https://b2c.passport.rt.ru:
 https://github.com/10Elena/10ELENA-PROJECT/edit/main/README.md  
 5.	Использовались библиотеки selenium, pytest, pytest-selenium
-6.	Для запуска необходимо набрать в терминале pytest -v --driver Chrome -driver-path C:\Users\71601088\PycharmProjects\pythonProject14chromedriver.exe test_rostelecom.py
 
 Перед запуском тестов требуется установить необходимые библиотеки командой:
 pip install -r requirements.txt Запуск тестов при помощи команд в консоли:
